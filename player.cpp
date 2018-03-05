@@ -11,8 +11,8 @@ Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
 
-    Board board();
-    Side color = side;
+    board = new Board();
+    color = side;
 
     /*
      * TODO: Do any initialization you need to do here (setting up the board,
@@ -56,22 +56,29 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
         opponent = WHITE;
     }
+    if(opponentsMove != nullptr){
+        std::cerr << "blah" << std::endl;
+        board->doMove(opponentsMove, opponent);
+    }
+    
+    int time = msLeft;
 
-    board.doMove(opponentsMove, opponent);
+    if(msLeft == -1){
+        time = 500000000;
+    }
 
-    while(msLeft > 0)
+    while(time > 0)
     {
+        std::cerr << "blah2" << std::endl;
         x = rand() % 8;
         y = rand() % 8;
-        if(board.hasMoves(color))
+        if(board->hasMoves(color))
         {
-            Move *move;
-            move->x = x;
-            move->y = y;
+            Move *move = new Move(x, y);
             
-            if(board.checkMove(move, color))
+            if(board->checkMove(move, color))
             {
-                board.doMove(move, color);
+                board->doMove(move, color);
                 return move;
             }
         }

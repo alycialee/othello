@@ -40,24 +40,25 @@ Player::~Player() {
  * The move returned must be legal; if there are no valid moves for your side,
  * return nullptr.
  */
+
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
     /*
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */
-
-    int x, y;
     Side opponent;
     if(color == WHITE)
     {
+        std::cerr << "WHITE" << std::endl;
         opponent = BLACK;
     }
     else
     {
+        std::cerr << "BLACK" << std::endl;
         opponent = WHITE;
     }
+
     if(opponentsMove != nullptr){
-        std::cerr << "blah" << std::endl;
         board->doMove(opponentsMove, opponent);
     }
     
@@ -66,23 +67,57 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     if(msLeft == -1){
         time = 500000000;
     }
-
-    while(time > 0)
-    {
-        std::cerr << "blah2" << std::endl;
-        x = rand() % 8;
-        y = rand() % 8;
+    Move* theMove = nullptr;
+    while(time > 0){
+        
         if(board->hasMoves(color))
         {
-            Move *move = new Move(x, y);
-            
-            if(board->checkMove(move, color))
-            {
-                board->doMove(move, color);
-                return move;
+            int max_score = -10;
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    Move *move = new Move(i, j);
+                    if(board->checkMove(move, color))
+                    { 
+                        int score = board->findWeight(move);
+                        if(score > max_score) {
+                            std::cerr << "1check " << board->checkMove(move, color) << std::endl;
+                            std::cerr << "score " << score << std::endl;
+                            std::cerr << "max_score " << max_score << std::endl;
+
+                            max_score = score;
+                            theMove = move;
+
+                            std::cerr << theMove->getX() << std::endl;
+                            std::cerr << theMove->getY() << std::endl;
+
+                            std::cerr << "check " << board->checkMove(theMove, color) << std::endl;
+                            
+                        }
+                    }
+                    //delete(move);
+                }
             }
+            board->doMove(theMove, color);
+            std::cerr << theMove->getX() << std::endl;
+            std::cerr << theMove->getY() << std::endl;
+            return theMove;
         }
     }
+    // while(time > 0)
+    // {
+    //     x = rand() % 8;
+    //     y = rand() % 8;
+    //     if(board->hasMoves(color))
+    //     {
+    //         Move *move = new Move(x, y);
+            
+    //         if(board->checkMove(move, color))
+    //         {
+    //             board->doMove(move, color);
+    //             return move;
+    //         }
+    //     }
+    // }
 
     return nullptr;
 }

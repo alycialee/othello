@@ -20,7 +20,7 @@ public:
     Board();
     ~Board();
     Board *copy();
-
+    int findWeight(Move *m);
     bool isDone();
     bool hasMoves(Side side);
     bool checkMove(Move *m, Side side);

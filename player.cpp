@@ -80,17 +80,14 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
                     { 
                         int score = board->findWeight(move);
                         if(score > max_score) {
-                            std::cerr << "1check " << board->checkMove(move, color) << std::endl;
-                            std::cerr << "score " << score << std::endl;
-                            std::cerr << "max_score " << max_score << std::endl;
 
                             max_score = score;
                             theMove = move;
 
-                            std::cerr << theMove->getX() << std::endl;
-                            std::cerr << theMove->getY() << std::endl;
+                            //std::cerr << theMove->getX() << std::endl;
+                            //std::cerr << theMove->getY() << std::endl;
 
-                            std::cerr << "check " << board->checkMove(theMove, color) << std::endl;
+                            //std::cerr << "check " << board->checkMove(theMove, color) << std::endl;
                             
                         }
                     }
@@ -98,8 +95,8 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
                 }
             }
             board->doMove(theMove, color);
-            std::cerr << theMove->getX() << std::endl;
-            std::cerr << theMove->getY() << std::endl;
+            //std::cerr << theMove->getX() << std::endl;
+            //std::cerr << theMove->getY() << std::endl;
             return theMove;
         }
     }

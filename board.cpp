@@ -20,13 +20,16 @@ Board::~Board() {
 
 int Board::findWeight(Move *m){
     int score;
-    if(((m->getX()) == 0 && (m->getY()) == 7)||(m->getY() == 0 && m->getX() == 7)){
+    if(((m->getX()) == 0 && (m->getY()) == 7)||(m->getY() == 0 && 
+            m->getX() == 7)){
         score = 5;
     }
-    else if(((m->getX() == 1 || m->getX() == 6) && (m->getY() == 0)) || ((m->getY() == 1 || m->getY() ==6) && (m->x == 0))){
+    else if(((m->getX() == 1 || m->getX() == 6) && (m->getY() == 0)) 
+        || ((m->getY() == 1 || m->getY() ==6) && (m->x == 0))){
         score = -3;
     }
-    else if(((m->getX() == 0) && ((2 <= m->getY()) && (m->getY() <= 5))) ||((m->getY() == 0) && ((2 <= m->getX()) && (m->getX() <= 5)))){
+    else if(((m->getX() == 0) && ((2 <= m->getY()) && (m->getY() <= 5))) 
+        ||((m->getY() == 0) && ((2 <= m->getX()) && (m->getX() <= 5)))){
         score = 3;
     }
     else{

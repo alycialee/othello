@@ -87,7 +87,8 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
                             //std::cerr << theMove->getX() << std::endl;
                             //std::cerr << theMove->getY() << std::endl;
 
-                            //std::cerr << "check " << board->checkMove(theMove, color) << std::endl;
+                            //std::cerr << "check " << board->checkMove
+                            //(theMove, color) << std::endl;
                             
                         }
                     }

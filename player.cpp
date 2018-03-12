@@ -72,20 +72,23 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         
         if(board->hasMoves(color))
         {
-            int max_score = -10;
+            int max_score = -30000;
             for(int i = 0; i < 8; i++){
                 for(int j = 0; j < 8; j++){
                     Move *move = new Move(i, j);
+                    
                     if(board->checkMove(move, color))
-                    { 
+                    {
+                        // std::cerr << "COORDINATES" << std::endl;
+                        //     std::cerr << move->getX() << std::endl;
+                        //     std::cerr << move->getY() << std::endl;
                         int score = board->findWeight(move);
                         if(score > max_score) {
 
                             max_score = score;
                             theMove = move;
 
-                            //std::cerr << theMove->getX() << std::endl;
-                            //std::cerr << theMove->getY() << std::endl;
+                            
 
                             //std::cerr << "check " << board->checkMove
                             //(theMove, color) << std::endl;
